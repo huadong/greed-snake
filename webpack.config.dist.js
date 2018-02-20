@@ -7,10 +7,9 @@ var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
 var ROOT_PATH = path.resolve(__dirname);
 var SRC_PATH = path.resolve(ROOT_PATH, 'src');
-var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
+var BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
 
 module.exports = {
-    devtool: 'cheap-eval-source-map',
     entry: {
         app: path.resolve(SRC_PATH, 'index.ts'),
     },
@@ -44,10 +43,10 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify('development')
+                NODE_ENV: JSON.stringify('production')
             }
         }),
-        new CleanWebpackPlugin(['build']),
+        new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({ 
             template: path.resolve(SRC_PATH, 'template/index.html'),
             filename: path.resolve(BUILD_PATH, 'index.html'), 

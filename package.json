@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --open",
-    "build": "webpack --progress --color"
+    "build": "webpack --progress --color",
+    "dist": "webpack --config webpack.config.dist.js --progress --color -p"
   },
   "repository": "https://github.com/huadong/greed-snake.git",
   "author": "Danny Zhong",

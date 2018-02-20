@@ -194,7 +194,7 @@ class Snake {
     _cols: number = 40;
     _rows: number = 40;
     _canvas: HTMLCanvasElement;
-    _matrix: Array<Array<Rect>>;//画布分格后的
+    _matrix: Array<Array<Rect>>;
 
     _mouses: Array<Point> = [];
     _players: Array<Player> = [];
@@ -552,7 +552,11 @@ class Snake {
             ctx.save();
             let snake = player.snake;
             for (let i = 0; i < snake.length; i++) {
-                this.drawCircle(snake[i].point, i == 0 ? (p==0?"red":"green") : "#f476ff");
+                let color = (p==0? "#f476ff":"#47e642");
+                if(i == 0) {
+                    color = (p==0? "red":"green");
+                }
+                this.drawCircle(snake[i].point, color);
                 if (i == 0) {
                     this.drawText(`${snake.length}`, snake[i].point);
                 }
