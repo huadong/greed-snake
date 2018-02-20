@@ -1,0 +1,11 @@
+.snake {
+    margin: 0 auto;
+    width: 800px;
+    height: 800px;
+    background-color: #f1f3b1;
+}
+
+#snake {
+    width: 100%;
+    height: 100%;
+}
