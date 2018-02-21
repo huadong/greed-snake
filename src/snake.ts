@@ -191,6 +191,8 @@ class Player {
 }
 
 class Snake {
+    _callbacks: {[name:string]:any} = {};
+
     _cols: number = 40;
     _rows: number = 40;
     _canvas: HTMLCanvasElement;
@@ -205,14 +207,20 @@ class Snake {
     _tickInterval: number | null = null;
     _tickCount: number = 0;
     _playerCount: number = 1;
+    _status: boolean = true;
 
-    constructor(canvas: HTMLCanvasElement, players: number = 1) {
+    constructor(canvas: HTMLCanvasElement, players: number = 1,
+         callbacks?: {[name:string]:any}) {
         this._onKeydown = this._onKeydown.bind(this);
         this.draw = this.draw.bind(this);
 
         canvas.width = canvas.clientWidth;
         canvas.height = canvas.clientHeight;
         this._canvas = canvas;
+
+        if(callbacks) {
+            this._callbacks = callbacks;
+        }
 
         //axis matrix
         this._matrix = [];
@@ -272,6 +280,10 @@ class Snake {
     }
 
     _tick() {
+        if(!this._status) {
+            return;
+        }
+        
         let t = ++this._tickCount % this.ELAPSE;
         if (t == 0) {
             this._tickCount = 0;
@@ -358,6 +370,9 @@ class Snake {
                     console.debug(`eat: ${m}`);
                     this._mouses.splice(i--, 1);
                     this._snakeGrow(player);
+                    if(this._callbacks.eat) {
+                        this._callbacks.eat();
+                    }
                 }
             }
         });
@@ -437,11 +452,12 @@ class Snake {
                 direct = "left";
                 break;
             case "d":
-            case "S":
+            case "D":
             case "ArrowRight":
                 direct = "right";
                 break;
             case " ":
+                this._status = !this._status;
                 console.log(`snake: ${snake}`);
                 console.log(`cmds: ${commands}`);
                 break;
