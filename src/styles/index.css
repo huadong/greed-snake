@@ -1,11 +1,28 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
 .snake {
-    margin: 0 auto;
-    width: 800px;
-    height: 800px;
+    margin: auto auto;
+    width: 90%;
+    height: 90%;
     background-color: #eff19c;
+    overflow: hidden;
+    transform: translateY(5%);
 }
 
 #snake {
     width: 100%;
     height: 100%;
+}
+
+.mouse {
+    display: none;
 }

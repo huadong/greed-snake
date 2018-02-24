@@ -218,6 +218,8 @@ class Snake {
         canvas.height = canvas.clientHeight;
         this._canvas = canvas;
 
+        this._cols = Math.floor(this._rows*canvas.clientWidth/canvas.clientHeight);
+
         if(callbacks) {
             this._callbacks = callbacks;
         }
@@ -225,14 +227,14 @@ class Snake {
         //axis matrix
         this._matrix = [];
 
-        let X: number = this.width / this._cols;
-        let Y: number = this.height / this._rows;
+        let X: number = this.width / (this._cols);
+        let Y: number = this.height / (this._rows);
 
-        for (let i = 0; i < this._rows; i++) {
+        for (let i = 0; i < this._cols; i++) {
             if (!this._matrix[i]) {
                 this._matrix[i] = []
             }
-            for (let j = 0; j < this._cols; j++) {
+            for (let j = 0; j < this._rows; j++) {
                 this._matrix[i][j] = new Rect(
                     new Point(X * i, Y * j),
                     new Point(X * (i + 1), Y * (j + 1))
